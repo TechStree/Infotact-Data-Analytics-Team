@@ -7,7 +7,7 @@ This repository contains the work, documentation, and deliverables for the Infot
 ### Team Members
 - Team Lead: Sanvi Srivastava
 - Goundla Ananthsairam
-- 
+- Srikanth Reddy
 - Sonu Kumar
 
 ### Objectives
