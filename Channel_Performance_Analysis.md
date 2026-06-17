@@ -28,5 +28,11 @@ Least Active Campaign:
 - Further analysis is required to determine which channels and campaigns generate the highest conversions.
 
 ## Conclusion
+## Notes
+
+Visualizations added on 17 June 2026.
+
+- Channel distribution chart uploaded.
+- Campaign distribution chart uploaded.
 
 The dataset contains a balanced distribution of marketing channels and campaigns, making it suitable for marketing attribution analysis and ROI evaluation.
