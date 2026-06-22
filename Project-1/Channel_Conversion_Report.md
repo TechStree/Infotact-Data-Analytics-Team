@@ -1,25 +1,28 @@
-# Conversion Analysis
+# Channel Conversion Report
 
-## Conversion Distribution
+## Conversion by Channel
 
-| Conversion Status | Count |
-| ----------------- | ----- |
-| Yes               | 4944  |
-| No                | 5056  |
+| Channel        | No  | Yes |
+| -------------- | --- | --- |
+| Direct Traffic | 868 | 853 |
+| Display Ads    | 841 | 828 |
+| Email          | 824 | 830 |
+| Referral       | 844 | 841 |
+| Search Ads     | 837 | 772 |
+| Social Media   | 842 | 820 |
 
-## Total Conversions
+## Highest Performing Channel
 
-Total successful conversions: **4944**
+**Direct Traffic** generated the highest number of conversions with **853 successful conversions**.
 
-## Conversion Rate
+## Lowest Performing Channel
 
-Conversion Rate = (4944 / 10000) × 100
+**Search Ads** generated the lowest number of conversions with **772 successful conversions**.
 
-**Conversion Rate: 49.44%**
+## Insights
 
-## Observations
-
-* The dataset contains a nearly balanced distribution of converted and non-converted users.
-* Out of 10,000 marketing interactions, 4,944 resulted in successful conversions.
-* The overall conversion rate of 49.44% indicates that almost half of the users completed the desired action.
-* Further analysis is required to identify which marketing channels and campaigns contribute most to conversions.
+* Direct Traffic is the most effective channel in terms of total conversions.
+* Email is the only channel where successful conversions (830) are higher than non-conversions (824), indicating strong performance.
+* Search Ads has the lowest conversion count and may require optimization.
+* Conversion counts across most channels are relatively balanced, suggesting comparable marketing performance.
+* Further attribution analysis can help identify the channels that contribute most effectively to customer conversions.
