@@ -1,0 +1,33 @@
+# Channel Performance Ranking
+
+## Channel Conversion Rates
+
+| Rank | Channel | Conversion Rate (%) |
+|------|----------|-------------------|
+| 1 | Email | 50.18 |
+| 2 | Referral | 49.91 |
+| 3 | Display Ads | 49.61 |
+| 4 | Direct Traffic | 49.56 |
+| 5 | Social Media | 49.34 |
+| 6 | Search Ads | 47.98 |
+
+## Ranking
+
+1. Email (50.18%)
+2. Referral (49.91%)
+3. Display Ads (49.61%)
+4. Direct Traffic (49.56%)
+5. Social Media (49.34%)
+6. Search Ads (47.98%)
+
+## Key Insights
+
+- Email achieved the highest conversion rate at 50.18%, making it the most effective channel in terms of converting users.
+- Referral and Display Ads also performed well, with conversion rates close to 50%.
+- Search Ads recorded the lowest conversion rate at 47.98%, indicating potential opportunities for optimization.
+- The conversion rates across most channels are relatively close, suggesting balanced marketing performance.
+- No channel significantly outperformed the others, which may indicate that multiple channels contribute effectively to conversions.
+
+## Conclusion
+
+Based on conversion rates, Email is the most effective marketing channel in the dataset, while Search Ads is the least effective. Most channels achieved conversion rates near 50%, indicating fairly consistent performance across marketing channels. Further attribution analysis can help determine the exact contribution of each channel to customer conversions.
