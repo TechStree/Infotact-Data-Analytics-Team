@@ -1,0 +1,118 @@
+# Week 2: Advanced SQL and Attribution Logic
+
+## Objective
+Load cleaned marketing attribution data into MySQL and perform advanced SQL analysis using Window Functions to model customer journeys and attribution logic.
+
+---
+
+## Tasks Completed
+
+### 1. Data Loading
+- Imported cleaned dataset into MySQL
+- Created marketing_data table
+- Loaded 10,000 customer touchpoint records
+
+### 2. Customer Journey Sequencing
+Used SQL Window Functions to sequence user journeys.
+
+```sql
+ROW_NUMBER() OVER(
+    PARTITION BY user_id
+    ORDER BY timestamp
+)
+```
+
+Generated ordered touchpoints for each customer.
+
+### 3. Journey Analysis
+- Calculated touchpoints per user
+- Determined average customer journey length
+- Analyzed conversion paths
+
+Average Journey Length: **3.51 touchpoints**
+
+### 4. First-Touch Attribution
+Assigned full conversion credit to the first marketing channel encountered by a user.
+
+Output:
+- first_touch_summary.csv
+
+### 5. Last-Touch Attribution
+Assigned full conversion credit to the final marketing channel before conversion.
+
+Output:
+- last_touch_summary.csv
+
+### 6. Linear Attribution
+Distributed conversion credit equally across all touchpoints.
+
+Formula:
+
+```sql
+1.0 / COUNT(*) OVER(PARTITION BY user_id)
+```
+
+Output:
+- linear_attribution_summary.csv
+
+### 7. SQL Concepts Used
+- Window Functions
+- ROW_NUMBER()
+- COUNT() OVER()
+- PARTITION BY
+- Common Table Expressions (CTEs)
+- Aggregations
+- GROUP BY
+- ORDER BY
+
+---
+
+## Deliverables
+
+- Week2_MySQL_Load.ipynb
+- first_touch_summary.csv
+- last_touch_summary.csv
+- linear_attribution_summary.csv
+- journey_data.csv
+- journey_preview_data.csv
+
+---
+
+## Key Results
+
+### First-Touch Attribution
+| Channel | Conversions |
+|----------|------------|
+| Direct Traffic | 511 |
+| Search Ads | 480 |
+| Email | 475 |
+| Display Ads | 468 |
+| Social Media | 458 |
+| Referral | 455 |
+
+### Linear Attribution
+| Channel | Credit |
+|----------|--------|
+| Direct Traffic | 487.81 |
+| Social Media | 475.08 |
+| Referral | 473.41 |
+| Display Ads | 471.91 |
+| Search Ads | 470.58 |
+| Email | 468.22 |
+
+---
+
+## Tools Used
+
+- MySQL 8.0
+- SQL
+- Python
+- Pandas
+- Jupyter Notebook
+
+---
+
+## Author
+
+Ananth Sai Ram  
+Data Analytics Intern
