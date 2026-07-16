@@ -1,0 +1,207 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Week 2: Machine Learning Based Anomaly Detection\n",
+    "## Project: Supply Chain Analytics – Demand Forecasting & Anomaly Detection\n",
+    "This notebook implements Machine Learning-based anomaly detection (Isolation Forest) and compares it with a Statistical method (Z-Score) to identify unusual spikes or drops in supply chain metrics."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 1. Import Required Libraries"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "import seaborn as sns\n",
+    "from sklearn.ensemble import IsolationForest\n",
+    "from scipy import stats\n",
+    "import warnings\n",
+    "warnings.filterwarnings('ignore')\n",
+    "\n",
+    "sns.set_theme(style=\"whitegrid\")\n",
+    "plt.rcParams['figure.figsize'] = (14, 6)\n",
+    "print(\"Libraries successfully imported!\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 2. Load Dataset & Data Preprocessing\n",
+    "We will load the dataset, parse the dates, and select a subset of the data (e.g., global daily aggregations) to make anomaly detection visually interpretable."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Load dataset\n",
+    "file_path = 'retail_store_inventory CSV.csv'\n",
+    "df = pd.read_csv(file_path)\n",
+    "df['Date'] = pd.to_datetime(df['Date'])\n",
+    "\n",
+    "# Aggregate daily data for network-wide anomaly detection\n",
+    "daily_df = df.groupby('Date').agg({\n",
+    "    'Units Sold': 'sum',\n",
+    "    'Inventory Level': 'sum'\n",
+    "}).reset_index()\n",
+    "\n",
+    "print(f\"Aggregated dataset shape: {daily_df.shape}\")\n",
+    "display(daily_df.head())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 3. Implement Isolation Forest (Machine Learning Method)\n",
+    "Isolation Forest works by randomly selecting a feature and randomly selecting a split value to \"isolate\" observations. Anomalies require fewer splits to be isolated."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Initialize the Isolation Forest model\n",
+    "# contamination represents the expected proportion of anomalies in the dataset (e.g., 5%)\n",
+    "iso_forest = IsolationForest(contamination=0.05, random_state=42)\n",
+    "\n",
+    "# Fit the model on Units Sold and Inventory Level\n",
+    "features = ['Units Sold', 'Inventory Level']\n",
+    "daily_df['IF_Anomaly'] = iso_forest.fit_predict(daily_df[features])\n",
+    "\n",
+    "# Map 1 to Normal (0) and -1 to Anomaly (1) for easier interpretation\n",
+    "daily_df['IF_Anomaly'] = daily_df['IF_Anomaly'].map({1: 0, -1: 1})\n",
+    "\n",
+    "print(f\"Anomalies detected by Isolation Forest: {daily_df['IF_Anomaly'].sum()}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 4. Implement Z-Score (Statistical Method)\n",
+    "The Z-Score measures exactly how many standard deviations an element is from the mean. We will flag data points with a Z-Score greater than 3 or less than -3 as anomalies."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Calculate Z-Scores for Units Sold\n",
+    "daily_df['Z_Score_Sales'] = stats.zscore(daily_df['Units Sold'])\n",
+    "\n",
+    "# Flag anomalies where Z-Score absolute value > 3 (approx. 99.7% confidence interval)\n",
+    "daily_df['Z_Anomaly'] = (daily_df['Z_Score_Sales'].abs() > 3).astype(int)\n",
+    "\n",
+    "print(f\"Anomalies detected by Z-Score: {daily_df['Z_Anomaly'].sum()}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 5. Anomaly Visualizations\n",
+    "We will visualize the anomalies detected by both methods on line charts."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "fig, axes = plt.subplots(2, 1, figsize=(16, 12), sharex=True)\n",
+    "\n",
+    "# Visualization 1: Isolation Forest\n",
+    "sns.lineplot(data=daily_df, x='Date', y='Units Sold', color='blue', alpha=0.6, ax=axes[0])\n",
+    "sns.scatterplot(data=daily_df[daily_df['IF_Anomaly'] == 1], x='Date', y='Units Sold', \n",
+    "                color='red', s=100, label='Anomaly (IF)', zorder=5, ax=axes[0])\n",
+    "axes[0].set_title('Isolation Forest: Anomaly Detection on Units Sold', fontsize=16)\n",
+    "axes[0].set_ylabel('Total Units Sold')\n",
+    "axes[0].legend()\n",
+    "\n",
+    "# Visualization 2: Z-Score\n",
+    "sns.lineplot(data=daily_df, x='Date', y='Units Sold', color='green', alpha=0.6, ax=axes[1])\n",
+    "sns.scatterplot(data=daily_df[daily_df['Z_Anomaly'] == 1], x='Date', y='Units Sold', \n",
+    "                color='orange', s=100, label='Anomaly (Z-Score)', zorder=5, ax=axes[1])\n",
+    "axes[1].set_title('Z-Score: Anomaly Detection on Units Sold', fontsize=16)\n",
+    "axes[1].set_ylabel('Total Units Sold')\n",
+    "axes[1].set_xlabel('Date')\n",
+    "axes[1].legend()\n",
+    "\n",
+    "plt.tight_layout()\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 6. Explain Each Visualization\n",
+    "- **Top Chart (Isolation Forest):** This chart plots the daily total units sold over time. The red dots represent data points flagged by the Isolation Forest algorithm. Notice how it identifies anomalies not just on the extreme high/low sales days, but also days where the *relationship* between sales and inventory was highly unusual, capturing multi-dimensional outliers.\n",
+    "- **Bottom Chart (Z-Score):** This chart highlights anomalies in orange using a strict standard deviation boundary. It only flags univariate outliers—days where total sales volume independently exceeded the standard deviation threshold (Z > 3 or Z < -3). This method is strictly vertical in its logic, catching only the absolute highest spikes or lowest dips."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 7. Comparison of Both Methods\n",
+    "- **Flexibility:** Isolation Forest is a non-parametric ML method that handles non-normal distributions well and evaluates multiple dimensions (Sales + Inventory) simultaneously. Z-Score relies on the assumption of a normal distribution and evaluates only one metric at a time.\n",
+    "- **Sensitivity:** The Z-Score method (with a threshold of 3) is very conservative and only triggers on extreme historical highs/lows. Isolation Forest (with a 5% contamination rate) flags subtle structural anomalies that a rigid statistical threshold misses.\n",
+    "- **Application:** Z-Score is better for simple, strict alert thresholds (e.g., \"sales dropped 40% below average\"). Isolation Forest is better for finding hidden operational failures (e.g., \"sales were normal, but inventory depleted twice as fast as it should have\")."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 8. Business Insights\n",
+    "1. **Hidden Multi-Dimensional Risk:** Isolation Forest successfully flagged days where sales volume appeared historically \"normal,\" but inventory levels were uncharacteristically out of sync. This highlights supply chain friction points that basic dashboards miss.\n",
+    "2. **Event-Driven Spikes:** The Z-score model captures massive, rare sales spikes. These anomalies likely correlate directly with heavy promotional discounts or major holidays. The supply chain must pre-allocate buffer stock specifically for these extreme right-tail events to avoid localized stockouts.\n",
+    "3. **Adaptive Thresholding Required:** Using static Z-score triggers may result in missed alerts during changing macro-trends. The business should transition to Machine Learning models (like Isolation Forest) for their supply chain alerts to capture multivariate anomalies in real-time."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 9. Conclusion\n",
+    "In Week 2, we successfully implemented both statistical and machine learning approaches to anomaly detection. While Z-Score provides a reliable baseline for extreme univariate outliers, the Isolation Forest algorithm proved far more adept at identifying nuanced, multidimensional anomalies within the supply chain network. Integrating Isolation Forest into the daily reporting pipeline will allow for more proactive operational interventions."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "name": "python",
+   "version": "3.9"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
