@@ -1,0 +1,118 @@
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE stg_spend_clicks
+SET spend_date='2025-02-10'
+WHERE spend_date<='2024-06-30';
+
+UPDATE stg_spend_clicks
+SET spend_date='2025-02-11'
+WHERE spend_date>'2024-06-30';
+
+UPDATE stg_spend_clicks
+SET channel = 'Display Ads'
+WHERE channel = 'TikTok Ads';
+
+SELECT DISTINCT channel
+FROM stg_spend_clicks;
+
+USE marketing_attribution;
+
+CREATE TABLE agg_marketing_performance AS
+SELECT
+    DATE(a.event_ts) AS performance_date,
+    a.channel,
+    a.campaign,
+    a.attribution_model,
+
+    COUNT(*) AS touchpoints,
+    COUNT(DISTINCT a.user_id) AS users_reached,
+    SUM(a.attributed_conversion) AS total_conversions,
+    SUM(a.attributed_revenue) AS total_revenue,
+
+    COALESCE(SUM(s.total_spend),0) AS total_spend,
+    COALESCE(SUM(s.total_clicks),0) AS total_clicks
+
+FROM stg_marketing_attribution a
+
+LEFT JOIN stg_spend_clicks s
+ON DATE(a.event_ts)=s.spend_date
+AND a.channel=s.channel
+
+GROUP BY
+DATE(a.event_ts),
+a.channel,
+a.campaign,
+a.attribution_model;
+
+SELECT *
+FROM agg_marketing_performance
+LIMIT 20;
+
+SELECT
+    channel,
+    SUM(total_spend) AS Spend,
+    SUM(total_revenue) AS Revenue,
+    SUM(total_conversions) AS Conversions,
+    ROUND(SUM(total_revenue) / NULLIF(SUM(total_spend), 0), 2) AS ROAS,
+    ROUND(SUM(total_spend) / NULLIF(SUM(total_clicks), 0), 2) AS CPC,
+    ROUND(SUM(total_spend) / NULLIF(SUM(total_conversions), 0), 2) AS CAC
+FROM fact_marketing_performance
+GROUP BY channel
+ORDER BY ROAS DESC;
+
+USE marketing_attribution;
+
+CREATE TABLE fact_marketing_performance AS
+
+SELECT
+performance_date,
+channel,
+campaign,
+attribution_model,
+
+touchpoints,
+users_reached,
+total_clicks,
+total_spend,
+total_conversions,
+total_revenue,
+
+CASE
+WHEN total_clicks>0
+THEN ROUND(total_spend/total_clicks,2)
+ELSE 0
+END AS CPC,
+
+CASE
+WHEN total_conversions>0
+THEN ROUND(total_spend/total_conversions,2)
+ELSE 0
+END AS CAC,
+
+CASE
+WHEN total_spend>0
+THEN ROUND(total_revenue/total_spend,2)
+ELSE 0
+END AS ROAS
+
+FROM agg_marketing_performance;
+
+SELECT *
+FROM fact_marketing_performance
+LIMIT 20;
+
+SELECT
+    attribution_model,
+    SUM(total_spend) AS Spend,
+    SUM(total_revenue) AS Revenue,
+    SUM(total_conversions) AS Conversions,
+    ROUND(SUM(total_revenue) / NULLIF(SUM(total_spend), 0), 2) AS ROAS,
+    ROUND(SUM(total_spend) / NULLIF(SUM(total_clicks), 0), 2) AS CPC,
+    ROUND(SUM(total_spend) / NULLIF(SUM(total_conversions), 0), 2) AS CAC
+FROM fact_marketing_performance
+GROUP BY attribution_model
+ORDER BY ROAS DESC;
+
+SELECT *
+FROM fact_marketing_performance
+LIMIT 20;
