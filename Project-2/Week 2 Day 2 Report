@@ -1,0 +1,50 @@
+# Week 2 Day 2 Report
+
+## Objective
+
+To identify anomalous demand observations using statistical anomaly detection techniques.
+
+## Z-Score Method
+
+The Z-Score method was applied using a threshold of ±3 standard deviations.
+
+### Findings
+
+* Number of anomalies detected: 0
+
+### Interpretation
+
+No observations exceeded the selected Z-Score threshold. This suggests that although the dataset contains high sales values, they are not extreme enough relative to the overall distribution to be classified as anomalies by the Z-Score method.
+
+---
+
+## IQR Method
+
+The Interquartile Range (IQR) method was applied to identify observations beyond the acceptable range.
+
+### Findings
+
+* Number of anomalies detected: 500
+
+### Interpretation
+
+The IQR method successfully identified high-demand observations that lie outside the upper bound of the distribution. These observations represent potential demand spikes and unusual sales behavior.
+
+---
+
+## Comparison of Methods
+
+| Method  | Number of Anomalies |
+| ------- | ------------------- |
+| Z-Score | 0                   |
+| IQR     | 500                 |
+
+### Observation
+
+The IQR method detected significantly more anomalies than the Z-Score method. This indicates that IQR is more effective for identifying anomalies in skewed sales distributions.
+
+---
+
+## Conclusion
+
+The Units Sold data contains several high-demand observations that were successfully detected using the IQR method. These anomalous demand patterns may represent seasonal peaks, promotional effects, or sudden increases in customer demand. The results will be further validated using machine learning-based anomaly detection in the next phase.
