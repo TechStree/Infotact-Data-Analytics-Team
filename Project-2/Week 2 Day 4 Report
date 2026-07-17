@@ -1,0 +1,81 @@
+# Week 2 Day 4 Report
+
+## Objective
+
+To compare anomaly detection techniques and derive business insights from the identified anomalies.
+
+## Comparison of Anomaly Detection Methods
+
+Three anomaly detection methods were evaluated:
+
+| Method           | Anomalies Detected |
+| ---------------- | ------------------ |
+| Z-Score          | 0                  |
+| IQR              | 500                |
+| Isolation Forest | 715                |
+
+### Findings
+
+* Z-Score did not detect any anomalies.
+* IQR detected 500 anomalous observations.
+* Isolation Forest detected 715 anomalous observations.
+
+---
+
+## Analysis
+
+### Z-Score Method
+
+The Z-Score method was unable to detect anomalies because the Units Sold data is positively skewed and does not follow a normal distribution. As a result, no observations exceeded the selected threshold of ±3 standard deviations.
+
+### IQR Method
+
+The IQR method successfully identified extreme demand values that lie outside the acceptable range. These anomalies represent unusual sales spikes.
+
+### Isolation Forest
+
+Isolation Forest detected the highest number of anomalies. Since it is a machine learning-based approach, it can identify unusual patterns even when the data distribution is not normal.
+
+---
+
+## Business Insights
+
+### Insight 1
+
+High-demand anomalies may indicate:
+
+* Seasonal demand peaks
+* Promotional campaigns
+* Special events
+* Sudden increases in customer demand
+
+### Insight 2
+
+Failure to identify demand anomalies can result in:
+
+* Inventory shortages
+* Lost sales opportunities
+* Customer dissatisfaction
+
+### Insight 3
+
+Continuous anomaly monitoring helps organizations:
+
+* Improve inventory planning
+* Optimize stock allocation
+* Reduce supply chain disruptions
+
+---
+
+## Recommendations
+
+1. Monitor products that repeatedly exhibit anomalous demand.
+2. Increase inventory levels before peak demand periods.
+3. Combine anomaly detection with forecasting techniques for better planning.
+4. Implement automated alerts for unusual sales spikes.
+
+---
+
+## Conclusion
+
+Among the evaluated methods, Isolation Forest performed best by detecting the highest number of anomalous demand observations. These results demonstrate the usefulness of machine learning techniques in identifying unusual sales behavior and improving supply chain decision-making.
