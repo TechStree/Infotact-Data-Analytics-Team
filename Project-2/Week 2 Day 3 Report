@@ -1,0 +1,39 @@
+# Week 2 Day 3 Report
+
+## Objective
+
+To apply a machine learning-based anomaly detection technique and compare its results with statistical methods.
+
+## Isolation Forest Method
+
+Isolation Forest was implemented using Units Sold as the input feature.
+
+### Findings
+
+* Number of anomalies detected: 715
+
+### Interpretation
+
+Isolation Forest identified 715 anomalous observations in the dataset. Most anomalies were concentrated in the higher Units Sold range, indicating unusual demand spikes.
+
+Unlike statistical methods, Isolation Forest isolates observations based on their uniqueness and distribution within the dataset. This allows it to detect anomalies more effectively in skewed data.
+
+---
+
+## Comparison of Methods
+
+| Method           | Anomalies Detected |
+| ---------------- | ------------------ |
+| Z-Score          | 0                  |
+| IQR              | 500                |
+| Isolation Forest | 715                |
+
+### Observation
+
+Isolation Forest detected the highest number of anomalies among all methods. This suggests that machine learning-based anomaly detection is more sensitive to unusual demand behavior compared to traditional statistical approaches.
+
+---
+
+## Conclusion
+
+The Isolation Forest model successfully identified anomalous demand observations that may represent seasonal peaks, promotional events, inventory shortages, or sudden increases in customer demand. The results will be used for comparison and business interpretation in the final analysis stage.
