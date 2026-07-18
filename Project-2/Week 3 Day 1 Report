@@ -1,0 +1,41 @@
+# Week 3 Day 1 Report
+
+## Objective
+
+To prepare the dataset for demand forecasting and implement a Moving Average forecasting approach.
+
+## Data Preparation
+
+* Converted the Date column into datetime format.
+* Sorted the dataset chronologically.
+* Set Date as the index for time-series analysis.
+
+## Historical Demand Trend
+
+A historical demand trend graph was generated using Units Sold.
+
+### Observation
+
+The demand data shows significant fluctuations over time with multiple peaks and drops. This indicates varying customer demand across different dates, products, and stores.
+
+## Moving Average Forecasting
+
+A 7-day Moving Average was applied to smooth short-term fluctuations in demand.
+
+### Observation
+
+The Moving Average line reduced noise in the data and highlighted the overall demand trend. Compared to actual demand values, the moving average produced a smoother representation of demand behavior.
+
+## Sample Forecast Values
+
+The latest forecast values were generated using the rolling average of the previous seven observations.
+
+## Business Interpretation
+
+* Moving Average forecasting helps identify underlying demand patterns.
+* Smoothing techniques reduce short-term volatility.
+* Forecasting can support inventory planning and replenishment decisions.
+
+## Conclusion
+
+The dataset was successfully prepared for time-series forecasting, and a 7-day Moving Average model was implemented as a baseline forecasting method. This serves as the foundation for advanced forecasting models in the next phase.
