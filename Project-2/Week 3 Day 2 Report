@@ -1,0 +1,63 @@
+# Week 3 Day 2 Report
+
+## Objective
+
+To evaluate the performance of the Moving Average forecasting model using forecast error analysis.
+
+## Forecast Error Calculation
+
+Forecast Error was calculated as:
+
+Forecast Error = Actual Demand − Forecast Demand
+
+Absolute Error was also calculated to measure the magnitude of forecasting deviations.
+
+## Mean Absolute Error (MAE)
+
+MAE = 81.14
+
+### Interpretation
+
+The forecasting model deviates from actual demand by approximately 81 units on average. This provides a quantitative measure of forecasting accuracy.
+
+---
+
+## Actual vs Forecast Comparison
+
+A comparison between actual demand and forecasted demand was visualized.
+
+### Observation
+
+The Moving Average forecast follows the general demand pattern but smooths short-term fluctuations. Sudden demand spikes are not fully captured by the model.
+
+---
+
+## Forecast Error Distribution
+
+A histogram of forecast errors was generated.
+
+### Observation
+
+Most forecast errors are concentrated around the center, while larger positive and negative errors occur less frequently. This indicates that the model performs reasonably well for normal demand levels but struggles with extreme demand variations.
+
+---
+
+## Business Insights
+
+### Insight 1
+
+Moving Average forecasting provides a simple baseline prediction method.
+
+### Insight 2
+
+The model performs well for stable demand periods but cannot effectively capture sudden demand spikes.
+
+### Insight 3
+
+More advanced forecasting techniques may improve forecasting accuracy.
+
+---
+
+## Conclusion
+
+The Moving Average model was evaluated using forecast error analysis and achieved an MAE of 81.14. While useful as a baseline forecasting approach, further forecasting models will be explored to improve prediction performance.
