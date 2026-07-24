@@ -1,0 +1,56 @@
+# Week 3 Day 4 – Forecasting Model Evaluation & Comparison
+
+## Objective
+
+Evaluate forecasting models using performance metrics and identify the best model for demand forecasting.
+
+## Tasks Completed
+
+### 1. ARIMA Model Evaluation
+
+Calculated forecasting performance metrics:
+
+* MAE (Mean Absolute Error): 901.61
+* RMSE (Root Mean Squared Error): 1118.03
+* MAPE (Mean Absolute Percentage Error): 6.84%
+
+### 2. Moving Average Evaluation
+
+Used previously generated Moving Average forecasting results.
+
+Performance Metrics:
+
+* MAE: 904.00
+* RMSE: 1125.00
+* MAPE: 6.90%
+
+### 3. Model Comparison
+
+Created a comparison table containing:
+
+| Model          | MAE    | RMSE    | MAPE |
+| -------------- | ------ | ------- | ---- |
+| Moving Average | 904.00 | 1125.00 | 6.90 |
+| ARIMA          | 901.61 | 1118.03 | 6.84 |
+
+### 4. Visualization
+
+Generated a bar chart comparing:
+
+* MAE
+* RMSE
+* MAPE
+
+for both forecasting models.
+
+### 5. Best Model Selection
+
+Selected ARIMA as the final forecasting model because:
+
+* Lowest MAE
+* Lowest RMSE
+* Lowest MAPE
+
+### Conclusion
+
+ARIMA demonstrated slightly better forecasting performance than the Moving Average model and was chosen as the final model for demand forecasting.
