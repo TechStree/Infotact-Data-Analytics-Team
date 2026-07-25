@@ -1,0 +1,63 @@
+# Week 3 Day 5 – Forecast Visualization and Forecast Analysis
+
+## Objective
+
+Visualize forecasting results and analyze forecasting performance for business interpretation.
+
+## Tasks Completed
+
+### 1. Forecast Results Dataset Creation
+
+Created a forecast results DataFrame containing:
+
+* Actual Demand
+* ARIMA Forecast
+
+Total Records:
+
+* 147 forecast observations
+
+### 2. Forecast Results Export
+
+Saved forecasting output as:
+
+forecast_results.csv
+
+This file can be used for reporting and dashboard integration.
+
+### 3. Forecast Visualization
+
+Generated an Actual Demand vs Forecasted Demand line chart.
+
+Observations:
+
+* Forecast remained relatively stable around 14,000 units.
+* Actual demand showed significant day-to-day fluctuations.
+* ARIMA captured the overall demand trend but smoothed extreme demand spikes.
+
+### 4. Demand Analysis
+
+Average Actual Demand:
+
+13,588.95 units
+
+Average Forecasted Demand:
+
+13,979.00 units
+
+Average Difference:
+
+390.05 units
+
+### 5. Business Interpretation
+
+* Demand remained relatively stable over the evaluation period.
+* Forecast values stayed close to actual demand levels.
+* ARIMA forecasting performance was consistent and reliable.
+* Small forecasting error indicates suitability for inventory planning and demand estimation.
+
+## Conclusion
+
+Forecast visualization confirmed that the ARIMA model successfully captured overall demand behavior and produced accurate forecasts with low forecasting error.
+
+The generated forecast dataset and visualizations are ready for integration into the final Streamlit dashboard.
