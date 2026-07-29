@@ -1,0 +1,29 @@
+## Category-wise Demand Analysis
+
+The demand distribution across product categories was analyzed.
+
+### Findings
+
+* Furniture recorded the highest total demand.
+* Electronics recorded the lowest total demand.
+* Demand across categories is relatively balanced with no major dominance.
+
+### Deliverables
+
+* Category_Demand_Distribution.png
+
+---
+
+## Region-wise Demand Analysis
+
+Demand was analyzed across operational regions.
+
+### Findings
+
+* East region recorded the highest demand.
+* West region recorded the lowest demand.
+* Regional demand is distributed fairly evenly across all locations.
+
+### Deliverables
+
+* Region_Demand_Distribution.png

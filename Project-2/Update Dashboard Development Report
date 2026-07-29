@@ -1,0 +1,22 @@
+## Forecast Dashboard Component
+
+Forecasting results were integrated into the dashboard development process.
+
+### Tasks Performed
+
+* Loaded forecast_results.csv.
+* Verified forecast dataset structure.
+* Visualized Actual Demand vs ARIMA Forecast.
+* Prepared forecast graph for dashboard integration.
+
+### Findings
+
+* Forecast dataset contains 147 observations.
+* Actual demand fluctuates significantly over time.
+* ARIMA forecast remains close to the overall average demand level.
+* Forecast trend can be displayed within the Streamlit dashboard for business users.
+
+### Deliverables
+
+* forecast_results.csv
+* Dashboard_Forecast_View.png
