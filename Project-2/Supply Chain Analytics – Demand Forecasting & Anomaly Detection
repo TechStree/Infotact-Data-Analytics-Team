@@ -1,0 +1,121 @@
+# Supply Chain Analytics – Demand Forecasting & Anomaly Detection
+
+## Project Overview
+
+This project focuses on analyzing supply chain sales and inventory data to forecast future demand and detect operational anomalies.
+
+The objective is to improve inventory planning and support data-driven supply chain decisions using statistical analysis and machine learning techniques.
+
+---
+
+## Dataset
+
+The dataset contains:
+
+* Date
+* Store ID
+* Product ID
+* Category
+* Region
+* Inventory Level
+* Units Sold
+* Units Ordered
+* Demand Forecast
+* Price
+* Discount
+* Weather Condition
+* Holiday/Promotion
+* Competitor Pricing
+* Seasonality
+
+Total Records: 73,100
+
+---
+
+## Technologies Used
+
+* Python
+* Pandas
+* NumPy
+* Matplotlib
+* Seaborn
+* Scikit-learn
+* Statsmodels
+* Streamlit
+
+---
+
+## Project Workflow
+
+### Week 1
+
+* Data Collection
+* Data Cleaning
+* Exploratory Data Analysis
+
+### Week 2
+
+* Anomaly Detection
+* Z-Score
+* IQR Method
+* Isolation Forest
+
+### Week 3
+
+* Moving Average Forecasting
+* ARIMA Forecasting
+* Model Evaluation
+
+### Week 4
+
+* Streamlit Dashboard Development
+* Reporting
+* Deployment Preparation
+
+---
+
+## Forecasting Results
+
+### Moving Average
+
+* MAE: 904.00
+* RMSE: 1125.00
+* MAPE: 6.90%
+
+### ARIMA
+
+* MAE: 901.61
+* RMSE: 1118.03
+* MAPE: 6.84%
+
+### Best Model
+
+ARIMA demonstrated the lowest forecasting error and was selected as the final forecasting model.
+
+---
+
+## Business Insights
+
+* Furniture category generated the highest demand.
+* East region achieved the highest sales performance.
+* Demand remained relatively stable throughout the observed period.
+* ARIMA forecasting provided reliable demand estimates.
+* Anomaly detection highlighted unusual demand spikes and drops.
+
+---
+
+## Dashboard Features
+
+* Historical Demand Analysis
+* Category Performance Analysis
+* Regional Performance Analysis
+* Demand Forecast Visualization
+* Forecast Accuracy Metrics
+* Business Recommendations
+
+---
+
+## Author
+
+Sanvi Srivastava
+Infotact Solutions Internship Project
